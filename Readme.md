@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ирина Матэуш](https://up.htmlacademy.ru/ecmascript/11/user/63669).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Еланцев](https://htmlacademy.ru/profile/id928641).
 
 ---
 
