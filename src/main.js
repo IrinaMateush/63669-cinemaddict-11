@@ -277,7 +277,6 @@ render(headerElement, createUserTitleTemplate());
 render(mainElement, createMenuTemplate());
 render(mainElement, createFilmsTemplate());
 
-const filmsElement = document.querySelector(`.films`);
 const filmsListElement = mainElement.querySelector(`.films-list`);
 const filmsContainerElement = filmsListElement.querySelector(`.films-list__container`);
 
@@ -300,5 +299,4 @@ for (let i = 0; i < EXTRA_COUNT; i++) {
 const footerElement = document.querySelector(`.footer`);
 render(footerElement, createFilmsCountTemplate());
 
-//render(mainElement, createFilmDetailsTemplate());
-
+render(mainElement, createFilmDetailsTemplate());
