@@ -1,4 +1,4 @@
-const createUserTitleTemplate = () => {
+export const createUserTitleTemplate = () => {
   return (
     `<section class="header__profile profile">
       <p class="profile__rating">Movie Buff</p>

@@ -1,4 +1,4 @@
-const createMenuTemplate = () => {
+export const createMenuTemplate = () => {
   return (
     `<nav class="main-navigation">
       <div class="main-navigation__items">

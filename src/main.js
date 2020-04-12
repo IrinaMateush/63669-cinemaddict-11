@@ -1,4 +1,4 @@
-import {createUserTitleTemplate} from "./components/user-title.js";
+import {createUserTitleTemplate} from "../src/components/user-title";
 import {createMenuTemplate} from "./components/menu.js";
 import {createFilmsTemplate} from "./components/films.js";
 import {createCardTemplate} from "./components/card.js";
