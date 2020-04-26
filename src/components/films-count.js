@@ -1,7 +1,10 @@
 export const createFilmsCountTemplate = () => {
+
+  const count = Math.floor(Math.random() * 10000);
+
   return (
     `<section class="footer__statistics">
-      <p>130 291 movies inside</p>
+      <p>${count} movies inside</p>
     </section>`
   );
 };
