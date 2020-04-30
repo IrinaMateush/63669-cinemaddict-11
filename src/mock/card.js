@@ -1,4 +1,6 @@
 import {getRandomArrayItem} from "../function.js";
+import {getDuration} from "../function.js";
+import {getRandomNumber} from "../function.js";
 import {getRandomIntegerNumber} from "../function.js";
 import {getRandomDate} from "../function.js";
 import {getDescription} from "../function.js";
@@ -13,15 +15,27 @@ export const COMMENT = `nice!`;
 
 const GENRE = [`Action`, `Western`, `Drama`, `Mystery`, `Comedy`, `Thriller`, `Romance`];
 
+let minute = getRandomIntegerNumber(3, 300)
+let date = getRandomDate()
+
 const generateCard = () => {
   return {
     title: getRandomArrayItem(FILM_NAMES),
-    rating: getRandomIntegerNumber(1, 9) + `.` + getRandomIntegerNumber(1, 9),
-    year: getRandomDate().year(),
-    duration: getRandomIntegerNumber(1, 5) + `h ` + getRandomIntegerNumber(0, 59) + `m`,
+    originalName: getRandomArrayItem(FILM_NAMES),
+    director: `Anthony Menn`,
+    writers:	`Anne Wigton, Heinz Herald, Richard Weil`,
+    actors:	`Erich von Stroheim, Mary Beth Hughes, Dan Duryea`,
+    releaseDate: date,
+    country: `USA`,
+    ageRating: `18+`,
+    rating: getRandomNumber(1, 9),
+    year: date.year(),
+    duration: getDuration(minute),
     genre: getRandomArrayItem(GENRE),
     poster: `./images/posters/` + getRandomArrayItem(POSTERS),
-    description: getDescription(DESCRIPTION)
+    description: getDescription(DESCRIPTION),
+    //comments: generateComments(COMMENTS_COUNT)
+    //сюда положить переменную с массивом комментариев, сейчас она и передавать в фильм детейлс
   };
 };
 

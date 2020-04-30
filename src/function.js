@@ -1,6 +1,5 @@
 import moment from "moment";
 
-export const DESCRIPTION = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`, `Cras aliquet varius magna, non porta ligula feugiat eget.`, `Fusce tristique felis at fermentum pharetra.`, `Aliquam id orci ut lectus varius viverra.`, `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`, `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`, `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`, `Sed sed nisi sed augue convallis suscipit in sed felis.`, `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`, `In rutrum ac purus sit amet tempus.`];
 const getRandomArrayItem = (array) => {
   const randomIndex = getRandomIntegerNumber(0, array.length);
 
@@ -11,13 +10,17 @@ const getRandomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
 };
 
+const getRandomNumber = (min, max) => {
+  return (min +  Math.random() * (max - min)).toFixed(1);
+};
+
 const getDescription = (array) => {
-  let count = getRandomIntegerNumber(1, 3);
-  let description = new Array;
+  const count = getRandomIntegerNumber(1, 3);
+  const description = [];
   for (var i = 0; i <= count; i++) {
-    description.push(getRandomArrayItem(array) + ` `);
+    description.push(getRandomArrayItem(array));
   }
-  return description.join(``);
+  return description.join(` `);
 };
 
 const getRandomDate = () => {
@@ -35,4 +38,11 @@ const getUserDate = () => {
   return userDate.format("YYYY-MM-DD hh:mm");
 };
 
-export { getRandomArrayItem, getRandomIntegerNumber, getRandomDate, getUserDate, getDescription };
+const getDuration = (minute) => {
+  let hour = (Math.floor(minute / 60))
+  minute = minute % 60;
+  let duration = hour < 1 ? (minute + `m`) : (hour + `h ` + minute + `m`)
+  return duration;
+};
+
+export { getRandomArrayItem, getRandomIntegerNumber, getRandomDate, getUserDate, getDescription,  getRandomNumber, getDuration};

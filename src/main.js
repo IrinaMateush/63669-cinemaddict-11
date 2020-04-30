@@ -5,8 +5,10 @@ import { createCardTemplate } from "./components/card.js";
 import { createShowMoreButtonTemplate } from "./components/show-more-button.js";
 import { createFilmsCountTemplate } from "./components/films-count.js";
 import { createFilmDetailsTemplate } from "./components/film-details.js";
+import { generateCard } from "./mock/card.js";
 import { generateCards } from "./mock/card.js";
-import { generateComment } from "./mock/comment.js";
+import { generateComments } from "./mock/comment.js";
+import { createCommentsMarkup } from "./components/film-details.js";
 
 const EXTRA_COUNT = 2;
 const EXTRA_FILMS_COUNT = 2;
@@ -14,9 +16,11 @@ const EXTRA_FILMS_COUNT = 2;
 const CARD_COUNT = 15;
 const SHOWING_CARDS_COUNT_ON_START = 5;
 const SHOWING_CARDS_COUNT_BY_BUTTON = 5;
+const COMMENTS_COUNT = 4;
 
-const cards = generateCards(CARD_COUNT);
-const comment = generateComment();
+const card = generateCard()
+const cards = generateCards(CARD_COUNT)
+const comments = generateComments(COMMENTS_COUNT)
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -63,6 +67,13 @@ for (let i = 0; i < EXTRA_COUNT; i++) {
 }
 
 const footerElement = document.querySelector(`.footer`);
+
 render(footerElement, createFilmsCountTemplate());
 
-//render(mainElement, createFilmDetailsTemplate(comment));
+
+render(mainElement, createFilmDetailsTemplate(card));
+
+const commentsListElement = mainElement.querySelector(`.film-details__comments-list`);
+
+comments.slice(0, COMMENTS_COUNT)
+  .forEach((comment) => render(commentsListElement, createCommentsMarkup(comment)));

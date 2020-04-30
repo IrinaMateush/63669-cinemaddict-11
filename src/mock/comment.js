@@ -12,4 +12,10 @@ const generateComment = () => {
   };
 };
 
-export {generateComment};
+const generateComments = (count) => {
+  return new Array(count)
+    .fill(``)
+    .map(generateComment);
+};
+
+export {generateComment, generateComments};
