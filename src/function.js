@@ -43,7 +43,7 @@ const getUserDate = () => {
   if ((userDate.year() === date.year()) && (userDate.month() === date.month()) && (userDate.day() === date.day())) {
     return userDate = `Today`;
   }
-  return userDate.format("YYYY-MM-DD hh:mm");
+  return userDate.format(`YYYY-MM-DD hh:mm`);
 };
 
 const getDuration = (minute) => {
