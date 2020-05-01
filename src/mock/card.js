@@ -4,7 +4,7 @@ import {getRandomNumber} from "../function.js";
 import {getRandomIntegerNumber} from "../function.js";
 import {getRandomDate} from "../function.js";
 import {getDescription} from "../function.js";
-import { generateComments } from "../mock/comment.js";
+import {generateComments} from "../mock/comment.js";
 
 export const FILM_NAMES = [`The Dance of Life`, `Sagebrush Trail`, `The Man with the Golden Arm`, `Santa Claus Conquers the Martians`, `Popeye the Sailor Meets Sindbad the Sailor`];
 
@@ -14,12 +14,12 @@ export const DESCRIPTION = [`Lorem ipsum dolor sit amet, consectetur adipiscing 
 
 export const COMMENT = `nice!`;
 
-export let comments_count = getRandomIntegerNumber(5, 9);
+export let commentsCount = getRandomIntegerNumber(5, 9);
 
 const GENRE = [`Action`, `Western`, `Drama`, `Mystery`, `Comedy`, `Thriller`, `Romance`];
 
-let minute = getRandomIntegerNumber(3, 300)
-let date = getRandomDate()
+let minute = getRandomIntegerNumber(3, 300);
+let date = getRandomDate();
 
 const generateCard = () => {
   return {
@@ -28,7 +28,7 @@ const generateCard = () => {
     director: `Anthony Menn`,
     writers:	`Anne Wigton, Heinz Herald, Richard Weil`,
     actors:	`Erich von Stroheim, Mary Beth Hughes, Dan Duryea`,
-    releaseDate: date.format("DD MMMM YYYY"),
+    releaseDate: date.format(`DD MMMM YYYY`),
     country: `USA`,
     ageRating: `18+`,
     rating: getRandomNumber(1, 9),
@@ -37,7 +37,7 @@ const generateCard = () => {
     genre: getRandomArrayItem(GENRE),
     poster: `./images/posters/` + getRandomArrayItem(POSTERS),
     description: getDescription(DESCRIPTION),
-    comments: generateComments(comments_count)
+    comments: generateComments(commentsCount)
   };
 };
 
