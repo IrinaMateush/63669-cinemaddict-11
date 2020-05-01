@@ -19,7 +19,7 @@ export const createCommentsMarkup = (comment) => {
 };
 
 export const createFilmDetailsTemplate = (card) => {
-  const {title, rating, originalName, description, genre, director, poster, writers, actors, releaseDate, country, ageRating, duration} = card;
+  const {title, rating, originalName, description, genre, director, poster, writers, actors, releaseDate, country, ageRating, duration, comments} = card;
 
   return (
     `<section class="film-details">
@@ -99,7 +99,7 @@ export const createFilmDetailsTemplate = (card) => {
 
         <div class="form-details__bottom-container">
           <section class="film-details__comments-wrap">
-            <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">4</span></h3>
+            <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
 
             <ul class="film-details__comments-list">
             </ul>

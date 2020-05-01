@@ -29,6 +29,14 @@ const getRandomDate = () => {
   return randomDate;
 };
 
+/*
+У меня так и не получилось  сделать тоже самое через moment.js
+let from = moment('1896-01-01 00:00:00').format('X');
+const to = moment().format('X'); или const to = moment()
+const random =getRandomIntegerNumber(from, to);
+В любом случае random выплевывает число != нормальному timestamp
+*/
+
 const getUserDate = () => {
   let date = moment();
   let userDate = getRandomDate();
