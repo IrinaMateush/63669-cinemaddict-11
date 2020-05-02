@@ -1,4 +1,6 @@
-export const createMenuTemplate = () => {
+import {createElement} from "../utils.js";
+
+const createMenuTemplate = () => {
   const count = Math.floor(Math.random() * 20);
 
   return (
@@ -19,3 +21,25 @@ export const createMenuTemplate = () => {
     </ul>`
   );
 };
+
+export default class Menu {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createMenuTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
