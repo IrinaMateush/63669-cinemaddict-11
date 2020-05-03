@@ -20,7 +20,7 @@ const createCommentsMarkup = (comment) => {
   );
 };
 
-export default class Comments {
+export default class Comment {
   constructor(comment) {
     this._comment = comment;
 
