@@ -7,6 +7,7 @@ import FilmsCountComponent from "./components/films-count.js";
 import FilmsComponent from "./components/films.js";
 import CommentComponent from "./components/comments.js";
 import MenuComponent from "./components/menu.js";
+import SortComponent from "./components/sort.js";
 import UserTitleComponent from "./components/user-title.js";
 import NoMoviesComponent from "./components/no-movies.js";
 
@@ -24,6 +25,7 @@ const mainElement = document.querySelector(`.main`);
 
 render(headerElement, new UserTitleComponent().getElement(), RenderPosition.BEFOREEND);
 render(mainElement, new MenuComponent().getElement(), RenderPosition.BEFOREEND);
+render(mainElement, new SortComponent().getElement(), RenderPosition.BEFOREEND);
 
 const renderCard = (filmsContainerElement, card) => {
   const cardComponent = new CardComponent(card);
