@@ -71,16 +71,17 @@ const renderCard = (filmsContainerElement, card) => {
 };
 
 const renderFilmsСontainer = (filmsComponent, cards) => {
-  const filmsSectionElement = mainElement.querySelector(`.films`);
-
-  if (cards.length == 0) {
-    render(filmsSectionElement, new NoMoviesComponent().getElement(), RenderPosition.AFTERBEGIN);
-    return;
-  }
-
   const filmsListElement = filmsComponent.getElement().querySelector(`.films-list`);
   const filmsContainerElement = filmsListElement.querySelector(`.films-list__container`);
-  const filmsListExtraElement = mainElement.querySelectorAll(`.films-list--extra`);
+  const filmsListExtraElement = filmsComponent.getElement().querySelectorAll(`.films-list--extra`);
+
+  if (cards.length == 0) {
+    render(filmsListElement, new NoMoviesComponent().getElement(), RenderPosition.AFTERBEGIN);
+    for ( let i = 0; i < filmsListExtraElement.length; i++) {
+      filmsListExtraElement[i].remove()
+    }
+    return;
+  }
 
   let showingCardsCount = SHOWING_CARDS_COUNT_ON_START;
   cards.slice(0, showingCardsCount)
