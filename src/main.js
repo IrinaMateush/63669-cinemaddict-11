@@ -5,9 +5,11 @@ import FilmDetailsComponent from "./components/film-details.js";
 import ShowMoreButtonComponent from "./components/show-more-button.js";
 import FilmsCountComponent from "./components/films-count.js";
 import FilmsComponent from "./components/films.js";
-import CommentsComponent from "./components/comments.js";
+import CommentComponent from "./components/comments.js";
 import MenuComponent from "./components/menu.js";
+import SortComponent from "./components/sort.js";
 import UserTitleComponent from "./components/user-title.js";
+import NoMoviesComponent from "./components/no-movies.js";
 
 const EXTRA_COUNT = 2;
 const EXTRA_FILMS_COUNT = 2;
@@ -23,6 +25,7 @@ const mainElement = document.querySelector(`.main`);
 
 render(headerElement, new UserTitleComponent().getElement(), RenderPosition.BEFOREEND);
 render(mainElement, new MenuComponent().getElement(), RenderPosition.BEFOREEND);
+render(mainElement, new SortComponent().getElement(), RenderPosition.BEFOREEND);
 
 const renderCard = (filmsContainerElement, card) => {
   const cardComponent = new CardComponent(card);
@@ -36,6 +39,16 @@ const renderCard = (filmsContainerElement, card) => {
   const onPopupCloseClick = (evt) => {
     evt.preventDefault();
     popupElement.getElement().remove();
+    document.removeEventListener(`keydown`, onEscKeyDown);
+  };
+
+  const onEscKeyDown = (evt) => {
+    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+
+    if (isEscKey) {
+      popupElement.getElement().remove();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
   };
 
   const cardPoster = cardComponent.getElement().querySelector(`.film-card__poster`);
@@ -52,15 +65,25 @@ const renderCard = (filmsContainerElement, card) => {
     const popupCloseButton = popupElement.getElement().querySelector(`.film-details__close-btn`);
 
     popupCloseButton.addEventListener(`click`, onPopupCloseClick);
+    document.addEventListener(`keydown`, onEscKeyDown);
 
     card.comments.slice(0, card.comments.length)
-      .forEach((comment) => render(commentsListElement, new CommentsComponent(comment).getElement(), RenderPosition.BEFOREEND));
+      .forEach((comment) => render(commentsListElement, new CommentComponent(comment).getElement(), RenderPosition.BEFOREEND));
   };
 };
 
 const renderFilmsСontainer = (filmsComponent, cards) => {
   const filmsListElement = filmsComponent.getElement().querySelector(`.films-list`);
   const filmsContainerElement = filmsListElement.querySelector(`.films-list__container`);
+  const filmsListExtraElement = filmsComponent.getElement().querySelectorAll(`.films-list--extra`);
+
+  if (cards.length == 0) {
+    render(filmsListElement, new NoMoviesComponent().getElement(), RenderPosition.AFTERBEGIN);
+    for ( let i = 0; i < filmsListExtraElement.length; i++) {
+      filmsListExtraElement[i].remove()
+    }
+    return;
+  }
 
   let showingCardsCount = SHOWING_CARDS_COUNT_ON_START;
   cards.slice(0, showingCardsCount)
@@ -82,8 +105,6 @@ const renderFilmsСontainer = (filmsComponent, cards) => {
     }
   });
 
-  const filmsListExtraElement = mainElement.querySelectorAll(`.films-list--extra`);
-
   for (let i = 0; i < EXTRA_COUNT; i++) {
     const filmsExtraContainerElement = filmsListExtraElement[i].querySelector(`.films-list__container`);
 
@@ -98,6 +119,3 @@ renderFilmsСontainer(filmsComponent, cards);
 
 const footerElement = document.querySelector(`.footer`);
 render(footerElement, new FilmsCountComponent().getElement(), RenderPosition.BEFOREEND);
-
-//поправить дату https://jsfiddle.net/bota4gzy/2/
-
