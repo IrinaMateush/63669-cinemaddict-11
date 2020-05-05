@@ -1,4 +1,3 @@
-import {createElement} from "../utils.js";
 import AbstractComponent from "../components/abstract-component";
 
 const createCardTemplate = (card) => {
@@ -33,5 +32,20 @@ export default class Card extends AbstractComponent {
 
   getTemplate() {
     return createCardTemplate(this._card);
+  }
+
+  setPosterClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__poster`)
+      .addEventListener(`click`, handler);
+  }
+
+  setTitleClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__title`)
+      .addEventListener(`click`, handler);
+  }
+
+  setCommentsClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__comments`)
+      .addEventListener(`click`, handler);
   }
 }

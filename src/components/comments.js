@@ -1,4 +1,3 @@
-import {createElement} from "../utils.js";
 import AbstractComponent from "../components/abstract-component";
 
 const createCommentsMarkup = (comment) => {

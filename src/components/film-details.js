@@ -1,4 +1,3 @@
-import {createElement} from "../utils.js";
 import AbstractComponent from "../components/abstract-component";
 
 const createFilmDetailsTemplate = (card) => {
@@ -132,5 +131,10 @@ export default class FilmDetails extends AbstractComponent {
 
   getTemplate() {
     return createFilmDetailsTemplate(this._card);
+  }
+
+  setCloseClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__close-btn`)
+      .addEventListener(`click`, handler);
   }
 }
