@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "../components/abstract-component";
 
 const createMenuTemplate = () => {
   const count = Math.floor(Math.random() * 20);
@@ -22,24 +22,8 @@ const createMenuTemplate = () => {
   );
 };
 
-export default class Menu {
-  constructor() {
-    this._element = null;
-  }
-
-  getTemplate() {
+export default class Menu extends AbstractComponent {
+getTemplate() {
     return createMenuTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

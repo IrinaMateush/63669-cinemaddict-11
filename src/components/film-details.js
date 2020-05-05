@@ -1,4 +1,5 @@
 import {createElement} from "../utils.js";
+import AbstractComponent from "../components/abstract-component";
 
 const createFilmDetailsTemplate = (card) => {
   const {title, rating, originalName, description, genre, director, poster, writers, actors, releaseDate, country, ageRating, duration, comments} = card;
@@ -123,26 +124,13 @@ const createFilmDetailsTemplate = (card) => {
   );
 };
 
-export default class FilmDetails {
+export default class FilmDetails extends AbstractComponent {
   constructor(card) {
+    super();
     this._card = card;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._card);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
