@@ -23,7 +23,7 @@ const createMenuTemplate = () => {
 };
 
 export default class Menu extends AbstractComponent {
-getTemplate() {
+  getTemplate() {
     return createMenuTemplate();
   }
 }

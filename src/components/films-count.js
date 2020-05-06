@@ -11,7 +11,7 @@ const createFilmsCountTemplate = () => {
   );
 };
 
-export default class FilmsCount extends AbstractComponent{
+export default class FilmsCount extends AbstractComponent {
   getTemplate() {
     return createFilmsCountTemplate();
   }

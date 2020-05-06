@@ -1,4 +1,4 @@
-import { render, RenderPosition, remove, removeElement } from "../utils/render.js";
+import {render, RenderPosition, remove, removeElement} from "../utils/render.js";
 import CardComponent from "../components/card.js";
 import FilmDetailsComponent from "../components/film-details.js";
 import ShowMoreButtonComponent from "../components/show-more-button.js";
@@ -70,8 +70,8 @@ export default class PageController {
     this._container = container;
     this._noMoviesComponent = new NoMoviesComponent();
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
-    this._menuComponent = new MenuComponent()
-    this._sortComponent = new SortComponent()
+    this._menuComponent = new MenuComponent();
+    this._sortComponent = new SortComponent();
   }
 
   render(cards) {
@@ -84,7 +84,7 @@ export default class PageController {
     render(mainElement, this._sortComponent, RenderPosition.AFTERBEGIN);
     render(mainElement, this._menuComponent, RenderPosition.AFTERBEGIN);
 
-    if (cards.length == 0) {
+    if (cards.length === 0) {
       render(filmsListElement, this._noMoviesComponent, RenderPosition.AFTERBEGIN);
       for (let i = 0; i < filmsListExtraElement.length; i++) {
         remove(filmsListExtraElement[i]);
