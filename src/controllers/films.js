@@ -4,6 +4,8 @@ import FilmDetailsComponent from "../components/film-details.js";
 import ShowMoreButtonComponent from "../components/show-more-button.js";
 import CommentComponent from "../components/comments.js";
 import NoMoviesComponent from "../components/no-movies.js";
+import MenuComponent from "../components/menu.js";
+import SortComponent from "../components/sort.js";
 
 const EXTRA_COUNT = 2;
 const EXTRA_FILMS_COUNT = 2;
@@ -63,12 +65,13 @@ const renderCards = (filmsContainerElement, cards) => {
   });
 };
 
-export default class FilmController {
+export default class PageController {
   constructor(container) {
     this._container = container;
-
     this._noMoviesComponent = new NoMoviesComponent();
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
+    this._menuComponent = new MenuComponent()
+    this._sortComponent = new SortComponent()
   }
 
   render(cards) {
@@ -78,7 +81,10 @@ export default class FilmController {
     const filmsListExtraElement = container.querySelectorAll(`.films-list--extra`);
     let showingCardsCount = SHOWING_CARDS_COUNT_ON_START;
 
-    if (cards.length == 0) { //если карточек нет, то показываем заглушку
+    render(mainElement, this._sortComponent, RenderPosition.AFTERBEGIN);
+    render(mainElement, this._menuComponent, RenderPosition.AFTERBEGIN);
+
+    if (cards.length == 0) {
       render(filmsListElement, this._noMoviesComponent, RenderPosition.AFTERBEGIN);
       for (let i = 0; i < filmsListExtraElement.length; i++) {
         remove(filmsListExtraElement[i]);
