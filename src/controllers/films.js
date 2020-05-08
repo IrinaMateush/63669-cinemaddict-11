@@ -66,22 +66,20 @@ const renderCards = (filmsContainerElement, cards) => {
 };
 
 const getSortedCards = (cards, sortType, from, to) => {
-  let sortedCards = [];
   const showingCards = cards.slice();
 
   switch (sortType) {
     case SortType.BY_RATING:
-      sortedCards = showingCards.sort((a, b) => b.rating - a.rating);
+      showingCards.sort((a, b) => b.rating - a.rating);
       break;
     case SortType.BY_DATE:
-      sortedCards = showingCards.sort((a, b) => b.releaseDate - a.releaseDate);
+      showingCards.sort((a, b) => b.releaseDate - a.releaseDate);
       break;
     case SortType.DEFAULT:
-      sortedCards = showingCards;
       break;
   }
 
-  return sortedCards.slice(from, to);
+  return showingCards.slice(from, to);
 };
 
 export default class PageController {
@@ -149,7 +147,7 @@ export default class PageController {
 
       filmsContainerElement.innerHTML = ``;
 
-      renderCards(filmsContainerElement, sortedCards.slice(0, showingCardsCount));
+      renderCards(filmsContainerElement, sortedCards);
 
       renderShowMoreButton();
     });

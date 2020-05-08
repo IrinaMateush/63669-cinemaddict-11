@@ -32,7 +32,7 @@ const generateCard = () => {
     country: `USA`,
     ageRating: `18+`,
     rating: getRandomNumber(1, 9),
-    year: date().year(),
+    year: date.year(),
     duration: getDuration(minute),
     genre: getRandomArrayItem(GENRE),
     poster: `./images/posters/` + getRandomArrayItem(POSTERS),
