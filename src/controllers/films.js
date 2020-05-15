@@ -1,11 +1,9 @@
 import {render, RenderPosition, remove, removeElement} from "../utils/render.js";
-import CardComponent from "../components/card.js";
-import FilmDetailsComponent from "../components/film-details.js";
 import ShowMoreButtonComponent from "../components/show-more-button.js";
-import CommentComponent from "../components/comments.js";
 import NoMoviesComponent from "../components/no-movies.js";
 import MenuComponent from "../components/menu.js";
 import SortComponent, {SortType} from "../components/sort.js";
+import CardController from "../controllers/card.js";
 
 const EXTRA_COUNT = 2;
 const EXTRA_FILMS_COUNT = 2;
@@ -13,55 +11,11 @@ const SHOWING_CARDS_COUNT_ON_START = 5;
 const SHOWING_CARDS_COUNT_BY_BUTTON = 5;
 const mainElement = document.querySelector(`.main`);
 
-const renderCard = (filmsContainerElement, card) => {
-  const cardComponent = new CardComponent(card);
-  render(filmsContainerElement, cardComponent, RenderPosition.BEFOREEND);
-
-  cardComponent.setPosterClickHandler((evt) => {
-    evt.preventDefault();
-    renderPopup();
-  });
-
-  cardComponent.setTitleClickHandler((evt) => {
-    evt.preventDefault();
-    renderPopup();
-  });
-
-  cardComponent.setCommentsClickHandler((evt) => {
-    evt.preventDefault();
-    renderPopup();
-  });
-
-  const popupElement = new FilmDetailsComponent(card);
-
-  popupElement.setCloseClickHandler((evt) => {
-    evt.preventDefault();
-    remove(popupElement.getElement());
-    document.removeEventListener(`keydown`, onEscKeyDown);
-  });
-
-  const onEscKeyDown = (evt) => {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-
-    if (isEscKey) {
-      remove(popupElement.getElement());
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
-  };
-
-  const renderPopup = () => {
-    render(mainElement, popupElement, RenderPosition.BEFOREEND);
-    const commentsListElement = popupElement.getElement().querySelector(`.film-details__comments-list`);
-    document.addEventListener(`keydown`, onEscKeyDown);
-
-    card.comments.slice(0, card.comments.length)
-      .forEach((comment) => render(commentsListElement, new CommentComponent(comment), RenderPosition.BEFOREEND));
-  };
-};
-
 const renderCards = (filmsContainerElement, cards) => {
-  cards.forEach((card) => {
-    renderCard(filmsContainerElement, card);
+  return cards.map((card) => {
+    const cardController = new CardController(filmsContainerElement);
+    cardController.render(card);
+    return cardController;
   });
 };
 
