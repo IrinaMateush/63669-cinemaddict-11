@@ -3,12 +3,11 @@ import CardComponent from "../components/card.js";
 import FilmDetailsComponent from "../components/film-details.js";
 import CommentComponent from "../components/comments.js";
 
-const mainElement = document.querySelector(`.main`); //?
+const mainElement = document.querySelector(`.main`);
 
 export default class CardController {
   constructor(container) {
     this._container = container;
-
     this._cardComponent = null;
     this._filmDetailComponent = null;
 
@@ -16,6 +15,7 @@ export default class CardController {
   }
 
   render(card) {
+    this._card = card;
     this._cardComponent = new CardComponent(card);
     this._filmDetailComponent = new FilmDetailsComponent(card);
 
@@ -44,12 +44,13 @@ export default class CardController {
   }
 
   _renderPopup() {
-    render(mainElement, this._filmDetailComponent, RenderPosition.BEFOREEND); //?
+    render(mainElement, this._filmDetailComponent, RenderPosition.BEFOREEND);
     const commentsListElement = this._filmDetailComponent.getElement().querySelector(`.film-details__comments-list`);
+
     document.addEventListener(`keydown`, this._onEscKeyDown);
 
-    card.comments.slice(0, card.comments.length) //?
-      .forEach((comment) => render(commentsListElement, new CommentComponent(comment), RenderPosition.BEFOREEND)); //?
+    this._card.comments.slice(0, this._card.comments.length)
+      .forEach((comment) => render(commentsListElement, new CommentComponent(comment), RenderPosition.BEFOREEND));
   }
 
   _onEscKeyDown(evt) {
