@@ -5,9 +5,10 @@ import CommentComponent from "../components/comments.js";
 
 const mainElement = document.querySelector(`.main`);
 
-export default class CardController {
-  constructor(container) {
+export default class MovieController {
+  constructor(container, onDataChange) {
     this._container = container;
+    this._onDataChange = onDataChange;
     this._cardComponent = null;
     this._filmDetailComponent = null;
 
@@ -41,6 +42,31 @@ export default class CardController {
       remove(this._filmDetailComponent.getElement());
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     });
+
+    this._cardComponent.setWatchlistButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-card__controls-item--active`);
+    });
+
+    this._cardComponent.setMarkButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-card__controls-item--active`);
+    });
+
+    this._cardComponent.setFavoriteButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-card__controls-item--active`);
+    });
+
+    this._filmDetailComponent.setWatchlistButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-details__control-label--active`);
+    });
+
+    this._filmDetailComponent.setMarkButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-details__control-label--active`);
+    });
+
+    this._filmDetailComponent.setFavoriteButtonClickHandler((evt) => {
+      evt.target.classList.toggle(`film-details__control-label--active`);
+    });
+
   }
 
   _renderPopup() {

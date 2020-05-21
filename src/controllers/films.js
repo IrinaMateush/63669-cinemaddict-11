@@ -3,7 +3,7 @@ import ShowMoreButtonComponent from "../components/show-more-button.js";
 import NoMoviesComponent from "../components/no-movies.js";
 import MenuComponent from "../components/menu.js";
 import SortComponent, {SortType} from "../components/sort.js";
-import CardController from "../controllers/card.js";
+import MovieController from "./movie.js";
 
 const EXTRA_COUNT = 2;
 const EXTRA_FILMS_COUNT = 2;
@@ -11,11 +11,11 @@ const SHOWING_CARDS_COUNT_ON_START = 5;
 const SHOWING_CARDS_COUNT_BY_BUTTON = 5;
 const mainElement = document.querySelector(`.main`);
 
-const renderCards = (filmsContainerElement, cards) => {
+const renderCards = (filmsContainerElement, cards, onDataChange) => {
   return cards.map((card) => {
-    const cardController = new CardController(filmsContainerElement);
-    cardController.render(card);
-    return cardController;
+    const movieController = new MovieController(filmsContainerElement, onDataChange);
+    movieController.render(card);
+    return movieController;
   });
 };
 
@@ -41,11 +41,12 @@ export default class PageController {
     this._cards = [];
     this._container = container;
     this._showingCardsCount = SHOWING_CARDS_COUNT_ON_START;
-    this._showedCardControllers = [];
+    this._showedMovieControllers = [];
     this._noMoviesComponent = new NoMoviesComponent();
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
     this._menuComponent = new MenuComponent();
     this._sortComponent = new SortComponent();
+    this._onDataChange = this._onDataChange.bind(this);
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
     this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
@@ -96,15 +97,27 @@ export default class PageController {
       this._showingCardsCount = this._showingCardsCount + SHOWING_CARDS_COUNT_BY_BUTTON;
 
       const sortedCards = getSortedCards(this._cards, this._sortComponent.getSortType(), prevCardsCount, this._showingTasksCount);
-      const newCards = renderCards(filmsContainerElement, sortedCards);
+      const newCards = renderCards(filmsContainerElement, sortedCards, this._onDataChange);
 
-      this._showedCardControllers = this._showedCardControllers.concat(newCards);
+      this._showedMovieControllers = this._showedMovieControllers.concat(newCards);
 
       if (this._showingCardsCount >= this._cards.length) {
         remove(this._showMoreButtonComponent.getElement());
         removeElement(this._showMoreButtonComponent);
       }
     });
+  }
+
+  _onDataChange(movieController, oldData, newData) {
+    const index = this._cards.findIndex((it) => it === oldData);
+
+    if (index === -1) {
+      return;
+    }
+
+    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
+
+    movieController.render(this._cards[index]);
   }
 
   _onSortTypeChange(sortType) {
@@ -117,8 +130,8 @@ export default class PageController {
 
     filmsContainerElement.innerHTML = ``;
 
-    const newCards = renderCards(filmsContainerElement, sortedCards);
-    this._showedCardControllers = newCards;
+    const newCards = renderCards(filmsContainerElement, sortedCards, this._onDataChange);
+    this._showedMovieControllers = newCards;
 
     this._renderShowMoreButton();
   }
