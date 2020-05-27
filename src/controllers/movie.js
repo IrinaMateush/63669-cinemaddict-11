@@ -43,28 +43,40 @@ export default class MovieController {
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     });
 
-    this._cardComponent.setWatchlistButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-card__controls-item--active`);
+    this._cardComponent.setWatchlistButtonClickHandler(() => {
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isAddToWatchlist: !card.isAddToWatchlist,
+      }));
     });
 
-    this._cardComponent.setMarkButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-card__controls-item--active`);
+    this._cardComponent.setMarkButtonClickHandler(() => {
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isMarkAsWatched: !card.isMarkAsWatched,
+      }));
     });
 
-    this._cardComponent.setFavoriteButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-card__controls-item--active`);
+    this._cardComponent.setFavoriteButtonClickHandler(() => {
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isFavorite: !card.isFavorite,
+      }));
     });
 
     this._filmDetailComponent.setWatchlistButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-details__control-label--active`);
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isAddToWatchlist: !card.isAddToWatchlist,
+      }));
     });
 
     this._filmDetailComponent.setMarkButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-details__control-label--active`);
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isMarkAsWatched: !card.isMarkAsWatched,
+      }));
     });
 
     this._filmDetailComponent.setFavoriteButtonClickHandler((evt) => {
-      evt.target.classList.toggle(`film-details__control-label--active`);
+      this._onDataChange(this, card, Object.assign({}, card, {
+        isFavorite: !card.isFavorite,
+      }));
     });
 
   }
