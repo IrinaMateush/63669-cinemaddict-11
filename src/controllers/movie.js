@@ -61,19 +61,19 @@ export default class MovieController {
       }));
     });
 
-    this._filmDetailComponent.setWatchlistButtonClickHandler((evt) => {
+    this._filmDetailComponent.setWatchlistButtonClickHandler(() => {
       this._onDataChange(this, card, Object.assign({}, card, {
         isAddToWatchlist: !card.isAddToWatchlist,
       }));
     });
 
-    this._filmDetailComponent.setMarkButtonClickHandler((evt) => {
+    this._filmDetailComponent.setMarkButtonClickHandler(() => {
       this._onDataChange(this, card, Object.assign({}, card, {
         isMarkAsWatched: !card.isMarkAsWatched,
       }));
     });
 
-    this._filmDetailComponent.setFavoriteButtonClickHandler((evt) => {
+    this._filmDetailComponent.setFavoriteButtonClickHandler(() => {
       this._onDataChange(this, card, Object.assign({}, card, {
         isFavorite: !card.isFavorite,
       }));
