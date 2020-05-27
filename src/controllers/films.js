@@ -69,11 +69,11 @@ export default class PageController {
       return;
     }
 
-    renderCards(filmsContainerElement, cards.slice(0, this._showingCardsCount));
+    renderCards(filmsContainerElement, cards.slice(0, this._showingCardsCount), this._onDataChange);
 
     for (let i = 0; i < EXTRA_COUNT; i++) {
       const filmsExtraContainerElement = filmsListExtraElement[i].querySelector(`.films-list__container`);
-      renderCards(filmsExtraContainerElement, this._cards.slice(0, EXTRA_FILMS_COUNT));
+      renderCards(filmsExtraContainerElement, this._cards.slice(0, EXTRA_FILMS_COUNT), this._onDataChange);
     }
 
     this._renderShowMoreButton();
